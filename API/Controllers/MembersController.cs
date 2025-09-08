@@ -1,6 +1,7 @@
 using API.Data;
 using Microsoft.AspNetCore.Mvc;
 using API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -9,17 +10,19 @@ namespace API.Controllers;
 public class MembersController(AppDbContext context) : ControllerBase
 {
     [HttpGet] //primer endpoint: localhost:5000/api/members
-    public ActionResult<IReadOnlyList<AppUser>> GetMembers() //metodo para obtener todos los miembros
+    public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers() //metodo para obtener todos los miembros
     //la lista contiene appuser
     //con IReadOnlyList se usa menos memoria que con List
     {
-        var members = context.Users.ToList(); //obtiene todos los usuarios de la base de datos y los convierte en una lista
+        var members = await context.Users.ToListAsync(); //obtiene todos los usuarios de la base de datos y los convierte en una lista
+
         return Ok(members); //devuelve la lista de miembros con un estado 200 OK
     }
 
     [HttpGet("{id}")] //https://localhost:5000/api/members/bob-id
-       public ActionResult<AppUser> GetMember(string id) {
-        var member = context.Users.Find(id); //busca un usuario por su id
+       public async Task<ActionResult<AppUser>> GetMember(string id) {
+
+        var member = await context.Users.FindAsync(id); //busca un usuario por su id
         
         if (member == null) return NotFound(); //si no encuentra el usuario, devuelve un estado 404 Not Found
         
