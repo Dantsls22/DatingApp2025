@@ -1,8 +1,11 @@
 
-<h1>{{ title() }}</h1> <!-- Interpolacion: cuando pones el valor de una variable -->
+<h1 class="text-3xl text-red-500">{{ title() }}</h1> <!-- Interpolacion: cuando pones el valor de una variable -->
 <ul>
   @for (member of members(); track member.id) {
 
     <li>{{ member.id }} - {{ member.displayName }}</li>
   }
 </ul>
+
+<button class="btn btn-accent">Accent</button>
+
