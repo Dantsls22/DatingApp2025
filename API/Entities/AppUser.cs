@@ -7,7 +7,14 @@ public class AppUser
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string DisplayName { get; set; }
     public required string Email { get; set; }
+
+    public required byte[] PasswordHash { get; set; }
+
+    public required byte[] PasswordSalt { get; set; }
+    
 }
+
+
 // el guid es un identificador unico global
 // required indica que es obligatorio
 //inmutable es decir que no se puede cambiar despues de la inicializacion
