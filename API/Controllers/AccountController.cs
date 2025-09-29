@@ -4,6 +4,7 @@ using System.Text;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,17 +30,12 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
         };
         context.Users.Add(user);
         await context.SaveChangesAsync();
-        
-        return new UserResponse
-        {
-            Id = user.Id,
-            Email = user.Email,
-            DisplayName = user.DisplayName,
-            Token = tokenService.CreateToken(user)
-        };
+
+        return user.ToDto(tokenService);
+
     }
     [HttpPost("login")]
-    
+
     public async Task<ActionResult<UserResponse>> Login(LoginRequest request)
     {
         var user = await context.Users.SingleOrDefaultAsync(u => u.Email == request.Email);
@@ -57,15 +53,10 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
                 return Unauthorized("Invalid email or password");
             }
         }
-        return new UserResponse
-        {
-            Id = user.Id,
-            Email = user.Email,
-            DisplayName = user.DisplayName,
-            Token = tokenService.CreateToken(user)
-        };
+
+        return user.ToDto(tokenService);
+
     }
-    
 
     private async Task<bool> EmailExists(string email)
     {
