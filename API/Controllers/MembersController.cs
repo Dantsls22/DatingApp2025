@@ -9,6 +9,7 @@ namespace API.Controllers;
 [Authorize]
 public class MembersController(AppDbContext context) : BaseApiController
 {
+    [AllowAnonymous]
     [HttpGet] //primer endpoint: localhost:5000/api/members
     public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers() //metodo para obtener todos los miembros
     //la lista contiene appuser

@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { Nav } from "../layout/nav/nav";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ import { lastValueFrom } from 'rxjs';
     // en proyectos grandes, normalmente se recomienda la opción 1 (provideHttpClient()
     // en main.ts) porque separa responsabilidades
     // y evita que el root component cargue dependencias globales.
-  ],
+    ,
+    Nav
+],
   templateUrl: './app.html',
   styleUrls: ['./app.css']   // ojo: es `styleUrls` en plural
 })
