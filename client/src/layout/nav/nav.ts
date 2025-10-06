@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { inject } from '@angular/core'; // Importamos la funcion inject
 import { AccountService } from '../../core/services/account-service';
@@ -9,15 +9,22 @@ import { AccountService } from '../../core/services/account-service';
   templateUrl: './nav.html',
   styleUrl: './nav.css'
 })
+
 export class Nav {
-  private accountService = inject(AccountService);
+  protected accountService = inject(AccountService);
   protected creds: any = {};
 
   login(): void{
     this.accountService.login(this.creds).subscribe({
-      next: response => console.log(JSON.stringify(response)),
+      next: response => {
+        console.log(response);
+        this.creds = {};
+      },
       error: error => alert(error.message)
     });
   }
 
+  logout(): void{
+    this.accountService.logout();
+  }
 }

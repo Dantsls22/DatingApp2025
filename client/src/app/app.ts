@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
+import { AccountService } from '../core/services/account-service';
 
 @Component({
   selector: 'app-root',
@@ -21,14 +22,22 @@ import { Nav } from "../layout/nav/nav";
   styleUrls: ['./app.css']   // ojo: es `styleUrls` en plural
 })
 export class App implements OnInit {
-
+  private accountService = inject(AccountService);
   private http = inject(HttpClient);
 
   title = signal('Dating App');
   members = signal<any>([]);   // puedes tiparlo con una interfaz si lo deseas
 
   async ngOnInit(): Promise<void> {
+    this.setcurrentUser();
     this.members.set(await this.getMembers());
+  }
+
+  setcurrentUser(): void {
+    const userString = localStorage.getItem("user");
+    if(!userString) return;
+      const user = JSON.parse(userString!);
+      this.accountService.currentUser.set(user); // Actualizamos el estado actual del usuario
   }
 
   async getMembers(): Promise<Object> {
