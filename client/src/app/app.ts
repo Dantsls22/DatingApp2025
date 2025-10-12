@@ -4,23 +4,24 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
 import { AccountService } from '../core/services/account-service';
+import { Home } from "../features/home/home";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
-    HttpClientModule
-    // habilita HttpClient en standalone
-    // en proyectos grandes, normalmente se recomienda la opción 1 (provideHttpClient()
-    // en main.ts) porque separa responsabilidades
-    // y evita que el root component cargue dependencias globales.
-    ,
-    Nav
-],
+    HttpClientModule,
+    Nav,
+    Home
+  ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']   // ojo: es `styleUrls` en plural
 })
+// habilita HttpClient en standalone
+// en proyectos grandes, normalmente se recomienda la opción 1 (provideHttpClient()
+// en main.ts) porque separa responsabilidades
+// y evita que el root component cargue dependencias globales.
+
 export class App implements OnInit {
   private accountService = inject(AccountService);
   private http = inject(HttpClient);
@@ -35,9 +36,9 @@ export class App implements OnInit {
 
   setcurrentUser(): void {
     const userString = localStorage.getItem("user");
-    if(!userString) return;
-      const user = JSON.parse(userString!);
-      this.accountService.currentUser.set(user); // Actualizamos el estado actual del usuario
+    if (!userString) return;
+    const user = JSON.parse(userString!);
+    this.accountService.currentUser.set(user); // Actualizamos el estado actual del usuario
   }
 
   async getMembers(): Promise<Object> {
