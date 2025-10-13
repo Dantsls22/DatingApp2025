@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
 import { AccountService } from '../core/services/account-service';
 import { Home } from "../features/home/home";
+import { User } from '../user';
 
 @Component({
   selector: 'app-root',
@@ -26,8 +27,8 @@ export class App implements OnInit {
   private accountService = inject(AccountService);
   private http = inject(HttpClient);
 
-  title = signal('Dating App');
-  members = signal<any>([]);   // puedes tiparlo con una interfaz si lo deseas
+  protected readonly title = signal('Dating App');
+  protected members = signal<User[]>([]);   // puedes tiparlo con una interfaz si lo deseas
 
   async ngOnInit(): Promise<void> {
     this.setcurrentUser();
@@ -41,9 +42,9 @@ export class App implements OnInit {
     this.accountService.currentUser.set(user); // Actualizamos el estado actual del usuario
   }
 
-  async getMembers(): Promise<Object> {
+  async getMembers(): Promise<User[]> {
     try {
-      return lastValueFrom(this.http.get('https://localhost:5001/api/members'))
+      return lastValueFrom(this.http.get<User[]>('https://localhost:5001/api/members'))
     } catch (error) {
       console.log(error);
       throw error;
