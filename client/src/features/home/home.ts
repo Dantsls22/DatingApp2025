@@ -12,7 +12,7 @@ export class Home { //con un enumerado tambien se puede, esto es modo registro
   @Input({ required: true }) membersFromApp: User[]= []; // recibe datos del padre (app component)
   protected registerMode = signal(false);
 
-  showRegister(): void {
-    this.registerMode.set(true);
+  showRegister(value: boolean): void {
+    this.registerMode.set(value);
   }
 }

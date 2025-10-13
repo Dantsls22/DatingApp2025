@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RegisterCreds } from '../../../types/registerCreds';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../user';
@@ -11,6 +11,7 @@ import { User } from '../../../user';
 })
 export class Register {
   membersFromHome = input.required<User[]>(); // recibe datos del padre (home component)
+  cancelRegister = output<boolean>(); // emite eventos al padre (home component)
   protected creds = {} as RegisterCreds;
 
   register(): void {
@@ -19,8 +20,7 @@ export class Register {
   }
 
   cancel(): void {
-    console.log("Cancel executed");
-    // Aquí iría la lógica para cancelar el registro
+    this.cancelRegister.emit(false); // Notifica al padre que se ha cancelado el registro
   }
 
 }
