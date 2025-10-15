@@ -1,19 +1,24 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
 import { AccountService } from '../core/services/account-service';
 import { Home } from "../features/home/home";
 import { User } from '../user';
+import { Router, RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
+
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,
     HttpClientModule,
     Nav,
-    Home
+    NgClass
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']   // ojo: es `styleUrls` en plural
@@ -26,7 +31,7 @@ import { User } from '../user';
 export class App implements OnInit {
   private accountService = inject(AccountService);
   private http = inject(HttpClient);
-
+  protected router = inject(Router);
   protected readonly title = signal('Dating App');
   protected members = signal<User[]>([]);   // puedes tiparlo con una interfaz si lo deseas
 
