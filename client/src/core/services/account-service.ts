@@ -13,7 +13,7 @@ export class AccountService {
   currentUser = signal<User | null>(null); // Estado reactivo para el usuario actual
   baseUrl = "https://localhost:5001/api/";
 
-  register(creds: RegisterCreds) {
+  register(creds: RegisterCreds): Observable<User> {
     return this.http.post<User>(this.baseUrl + 'account/register', creds).pipe(  // Observable<User>
       tap(user => {
         if (user) {
