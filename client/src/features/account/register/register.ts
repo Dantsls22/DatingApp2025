@@ -10,7 +10,6 @@ import { User } from '../../../user';
   styleUrl: './register.css'
 })
 export class Register {
-  membersFromHome = input.required<User[]>(); // recibe datos del padre (home component)
   cancelRegister = output<boolean>(); // emite eventos al padre (home component)
   protected creds = {} as RegisterCreds;
 
