@@ -1,25 +1,15 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import { Nav } from "../layout/nav/nav";
-import { AccountService } from '../core/services/account-service';
-import { Home } from "../features/home/home";
-import { User } from '../user';
 import { Router, RouterOutlet } from '@angular/router';
-import { NgClass } from '@angular/common';
-
-
-
-
+import { Nav } from "../layout/nav/nav";
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
     HttpClientModule,
-    Nav,
-    NgClass
-  ],
+    Nav
+],
   templateUrl: './app.html',
   styleUrls: ['./app.css']   // ojo: es `styleUrls` en plural
 })
@@ -28,31 +18,6 @@ import { NgClass } from '@angular/common';
 // en main.ts) porque separa responsabilidades
 // y evita que el root component cargue dependencias globales.
 
-export class App implements OnInit {
-  private accountService = inject(AccountService);
-  private http = inject(HttpClient);
+ export class App {
   protected router = inject(Router);
-  protected readonly title = signal('Dating App');
-  protected members = signal<User[]>([]);   // puedes tiparlo con una interfaz si lo deseas
-
-  async ngOnInit(): Promise<void> {
-    this.setcurrentUser();
-    this.members.set(await this.getMembers());
-  }
-
-  setcurrentUser(): void {
-    const userString = localStorage.getItem("user");
-    if (!userString) return;
-    const user = JSON.parse(userString!);
-    this.accountService.currentUser.set(user); // Actualizamos el estado actual del usuario
-  }
-
-  async getMembers(): Promise<User[]> {
-    try {
-      return lastValueFrom(this.http.get<User[]>('https://localhost:5001/api/members'))
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
 }
