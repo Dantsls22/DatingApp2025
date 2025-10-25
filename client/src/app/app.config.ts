@@ -1,16 +1,18 @@
 import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes'; //esto depende de si el archivo existe
 import { InitService } from '../core/services/init-service';
 import { last, lastValueFrom } from 'rxjs';
+import { errorInterceptor } from '../core/interceptors/error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withViewTransitions()),
+    provideHttpClient(withInterceptors([errorInterceptor])),
     importProvidersFrom(HttpClientModule), //  agregado
     provideAppInitializer(async () => {
       // Aquí puedes agregar lógica de inicialización si es necesario
