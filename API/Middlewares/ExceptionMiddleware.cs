@@ -4,8 +4,6 @@ using API.Exceptions;
 
 namespace API.Middlewares;
 
-
-
 public class ExceptionMiddleware(
     RequestDelegate next,
     ILogger<ExceptionMiddleware> logger,
