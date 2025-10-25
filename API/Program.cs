@@ -1,6 +1,7 @@
 using System.Text;
 using API.Data;
 using API.Interfaces;
+using API.Middlewares;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -36,10 +37,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
+//app.UseDeveloperExceptionPage(); usar la pagina de excepciones para desarrolladores, en launchsettings.json debe estar en Development y no en Production
+
+app.UseMiddleware<ExceptionMiddleware>(); // usar el middleware de excepciones personalizado
 app.UseCors(x => x.AllowAnyHeader().
-AllowAnyMethod().
-WithOrigins("http://localhost:4200",
-"https://localhost:4200"));
+    AllowAnyMethod().
+    WithOrigins("http://localhost:4200",
+    "https://localhost:4200"
+));
+
 // permitir cualquier cabecera y metodo desde el origen especificado
 
 app.UseAuthentication();
