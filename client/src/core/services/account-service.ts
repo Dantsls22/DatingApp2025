@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../../user';
+import { User } from '../../types/user';
 import { Observable, tap } from 'rxjs';
 import { RegisterCreds } from '../../types/registerCreds';
 
