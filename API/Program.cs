@@ -22,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddCors(); // agregar CORS
 builder.Services.AddScoped<ITokenService, TokenService>(); // agregar el servicio de token como singleton
+builder.Services.AddScoped<IMembersRepository, MemberRepository>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
