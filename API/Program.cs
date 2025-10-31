@@ -1,71 +1,103 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using System.Text.Json.Serialization;
 using API.Data;
 using API.Interfaces;
 using API.Middlewares;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+namespace API;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers(); // agregar controladores
-builder.Services.AddDbContext<AppDbContext>(opt =>
+[ExcludeFromCodeCoverage]
+public static class Program
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")); // usar sqlite y la cadena de conexion del appsettings.json
-});
-// agregar el contexto de la base de datos
-
-builder.Services.AddCors(); // agregar CORS
-builder.Services.AddScoped<ITokenService, TokenService>(); // agregar el servicio de token como singleton
-builder.Services.AddScoped<IMembersRepository, MemberRepository>();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(options =>
-{
-    var tokenKey = builder.Configuration["TokenKey"] ?? throw new ArgumentNullException("Cannot get the token key - Program.cs");
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    public static void Main(string[] args)
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-});
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddHealthChecks();
+        AddServiceDefaults(builder);
 
+        builder.Services.AddControllers()
+            .AddMvcOptions(options =>
+            {
+                // Add the filter we could have
+            })
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
-var app = builder.Build();
-// Configure the HTTP request pipeline.
-//app.UseDeveloperExceptionPage(); usar la pagina de excepciones para desarrolladores, en launchsettings.json debe estar en Development y no en Production
+        builder.Services.AddMemoryCache();
 
-app.UseMiddleware<ExceptionMiddleware>(); // usar el middleware de excepciones personalizado
-app.UseCors(x => x.AllowAnyHeader().
-    AllowAnyMethod().
-    WithOrigins("http://localhost:4200",
-    "https://localhost:4200"
-));
+        AddDbContext(builder);
+        AddScopedServices(builder);
 
-// permitir cualquier cabecera y metodo desde el origen especificado
+        WebApplication app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<AppDbContext>();
+            context.Database.Migrate();
+            Task.Run(() => Seed.SeedUsers(context));
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger>();
+            logger.LogError(ex, "Migration process failed!");
+        }
+        // Configure the HTTP request pipeline.
+        app.UseMiddleware<ExceptionMiddleware>();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseCors(x => x.AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins(
+                "http://localhost:4200",
+                "https://localhost:4200"
+            ));
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-try
-{
-    var context = services.GetRequiredService<AppDbContext>();
-    await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
+            app.UseDeveloperExceptionPage();
+        }
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapControllers();
+
+        app.Run();
+    }
+
+    private static void AddServiceDefaults(WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors();
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var tokenKey = builder.Configuration["TokenKey"]
+                    ?? throw new ArgumentNullException("Cannot get the token key - Program.cs");
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+    }
+
+    private static void AddDbContext(WebApplicationBuilder builder)
+    {
+        builder.Services.AddDbContext<AppDbContext>(opt =>
+        {
+            opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"));
+        });
+    }
+
+    private static void AddScopedServices(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<ITokenService, TokenService>();
+        builder.Services.AddScoped<IMembersRepository, MemberRepository>();
+    }
 }
-catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "Migration process failed!");
-}
-
-app.Run();
