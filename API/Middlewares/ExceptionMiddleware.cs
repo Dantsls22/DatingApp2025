@@ -15,6 +15,21 @@ public class ExceptionMiddleware(
         {
             await next(context);
         }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            logger.LogError(ex, "{message}", ex.Message);
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            var response = env.IsDevelopment() ?
+                new APIException(context.Response.StatusCode, ex.Message, ex.StackTrace) :
+                new APIException(context.Response.StatusCode, ex.Message, "The provided params are incorrect");
+
+            var option = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var json = JsonSerializer.Serialize(response, option);
+
+            await context.Response.WriteAsync(json);
+        }
         catch (Exception ex)
         {
             logger.LogError(ex, "{message}", ex.Message);
@@ -23,13 +38,13 @@ public class ExceptionMiddleware(
 
             var response = env.IsDevelopment() ?
                 new APIException(context.Response.StatusCode, ex.Message, ex.StackTrace) :
-                new APIException(context.Response.StatusCode, ex.Message, "Internal Server Error");
+                new APIException(context.Response.StatusCode, ex.Message, "Internal server error");
 
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var json = JsonSerializer.Serialize(response, options);
+            var option = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var json = JsonSerializer.Serialize(response, option);
+
             await context.Response.WriteAsync(json);
         }
-
     }
-}
 
+}
