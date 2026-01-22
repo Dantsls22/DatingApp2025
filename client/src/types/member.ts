@@ -1,4 +1,4 @@
-export interface UserProfile{
+export interface Member {
   id: string;
   birthDate: string;        // or Date if you parse it
   imageUrl?: string;
