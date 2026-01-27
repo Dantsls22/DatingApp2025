@@ -418,3 +418,5 @@ FodyWeavers.xsd
 *.msp
 
 .fake
+API/dating.db-shm
+API/dating.db-wal
