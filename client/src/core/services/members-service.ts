@@ -25,7 +25,7 @@ export class MembersService {
   private getHttpOptions() {
     return {
       headers: new HttpHeaders({
-        Authorization: "Bearer "  + this.accountService.currentUser()?.token
+        Authorization: "Bearer " + this.accountService.currentUser()?.token
       })
     };
   }
