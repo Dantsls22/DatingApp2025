@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Member } from '../../types/member';
+import { Member, Photo } from '../../types/member';
 
 
 @Injectable({
@@ -19,4 +19,11 @@ export class MembersService {
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.baseUrl + "members");
   }
+
+  getPhotos(id: string){
+    return this.http.get<Photo[]>(`${this.baseUrl}members/${id}/photos`);
+  }
+
+
+
 }
