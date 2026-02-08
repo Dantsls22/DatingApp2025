@@ -1,0 +1,45 @@
+meta {
+  name: Members - Valid
+  type: http
+  seq: 1
+}
+
+get {
+  url: https:localhost:5001/api/members/
+  body: none
+  auth: bearer
+}
+
+headers {
+  Authorization: {{authToken}}
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+vars:pre-request {
+  authToken: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyZW5pdGFAdGVzdC5jb20iLCJuYW1laWQiOiJhcmVuaXRhLWlkIiwibmJmIjoxNzcwNTgyNzM5LCJleHAiOjE3NzExODc1MzksImlhdCI6MTc3MDU4MjczOX0.QD0cGHvJBHg5c25PbSuCcqY0k6_wOBOUWs8Wo8bfJsd7igvoZ0apiIWcMONglReX5CMIL5xNlSz993Ju7xBO_A
+}
+
+tests {
+  test("Should return OK", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("should return members", function(){
+    const jsonData = res.getBody();
+    const firstMember = jsonData[0];
+    
+    expect(firstMember).to.have.property("id");
+    expect(firstMember).to.have.property("displayName");
+    
+    expect(firstMember.id).to.equal("arenita-id");
+    expect(firstMember.displayName).to.equal("Arenita");
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
