@@ -423,3 +423,4 @@ FodyWeavers.xsd
 API/dating.db-shm
 API/dating.db-wal
 API/dating.db-shm
+src/API/appsettings.json
