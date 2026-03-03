@@ -14,6 +14,12 @@ headers {
   Authorization: Bearer {{token}}
 }
 
+vars:pre-request {
+  token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyZW5pdGFAdGVzdC5jb20iLCJuYW1laWQiOiJhcmVuaXRhLWlkIiwibmJmIjoxNzcyNDA2NDA5LCJleHAiOjE3NzMwMTEyMDksImlhdCI6MTc3MjQwNjQwOX0.HeSr3VnqrD_YEcZKz4O-_LkZNl6DTvY9GfRSo9WIxXHVq7bEJwxx65GLHHCVWr2rBO_ecSiDgnjeQIdBy1eX0A
+  baseUrl: https://localhost:5001
+}
+
 settings {
   encodeUrl: true
+  timeout: 0
 }
