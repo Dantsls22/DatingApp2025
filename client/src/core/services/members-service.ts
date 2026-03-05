@@ -43,4 +43,5 @@ export class MembersService {
   setMainPhoto(photo: Photo){
     return this.http.put(this.baseUrl + "members/photo/" + photo.id, {});
   }
+
 }
