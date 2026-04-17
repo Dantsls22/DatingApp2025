@@ -1,32 +1,47 @@
 meta {
   name: Members - Valid
   type: http
+<<<<<<< HEAD
   seq: 1
 }
 
 get {
   url: https:localhost:5001/api/members/
+=======
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/members
+>>>>>>> basaar/parcial05
   body: none
   auth: bearer
 }
 
+<<<<<<< HEAD
 headers {
   Authorization: {{authToken}}
 }
 
+=======
+>>>>>>> basaar/parcial05
 auth:bearer {
   token: {{authToken}}
 }
 
+<<<<<<< HEAD
 vars:pre-request {
   authToken: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyZW5pdGFAdGVzdC5jb20iLCJuYW1laWQiOiJhcmVuaXRhLWlkIiwibmJmIjoxNzcwNTgyNzM5LCJleHAiOjE3NzExODc1MzksImlhdCI6MTc3MDU4MjczOX0.QD0cGHvJBHg5c25PbSuCcqY0k6_wOBOUWs8Wo8bfJsd7igvoZ0apiIWcMONglReX5CMIL5xNlSz993Ju7xBO_A
 }
 
+=======
+>>>>>>> basaar/parcial05
 tests {
   test("Should return OK", function() {
     expect(res.getStatus()).to.equal(200);
   });
   
+<<<<<<< HEAD
   test("should return members", function(){
     const jsonData = res.getBody();
     const firstMember = jsonData[0];
@@ -34,6 +49,15 @@ tests {
     expect(firstMember).to.have.property("id");
     expect(firstMember).to.have.property("displayName");
     
+=======
+  test("Should return members", function() {
+    const jsonData = res.getBody();
+    const firstMember = jsonData[0];
+  
+    expect(firstMember).to.have.property("id");
+    expect(firstMember).to.have.property("displayName");
+  
+>>>>>>> basaar/parcial05
     expect(firstMember.id).to.equal("arenita-id");
     expect(firstMember.displayName).to.equal("Arenita");
   });
@@ -41,5 +65,8 @@ tests {
 
 settings {
   encodeUrl: true
+<<<<<<< HEAD
   timeout: 0
+=======
+>>>>>>> basaar/parcial05
 }

@@ -10,8 +10,11 @@
 *.userosscache
 *.sln.docstates
 *.env
+<<<<<<< HEAD
 *.db-wal
 *.db-shm
+=======
+>>>>>>> basaar/parcial05
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -54,6 +57,10 @@ Generated\ Files/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 *.trx
+<<<<<<< HEAD
+=======
+[Cc]overage[Rr]eport*/
+>>>>>>> basaar/parcial05
 
 # NUnit
 *.VisualState.xml
@@ -419,8 +426,13 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+<<<<<<< HEAD
 .fake
 API/dating.db-shm
 API/dating.db-wal
 API/dating.db-shm
 src/API/appsettings.json
+=======
+# SQLite database files
+*.db*
+>>>>>>> basaar/parcial05

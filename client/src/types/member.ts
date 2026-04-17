@@ -1,6 +1,10 @@
 export interface Member {
   id: string;
+<<<<<<< HEAD
   birthDate: string;        // or Date if you parse it
+=======
+  birthDay: string;
+>>>>>>> basaar/parcial05
   imageUrl?: string;
   displayName: string;
   created: string;
@@ -14,7 +18,11 @@ export interface Member {
 export interface Photo {
   id: number;
   url: string;
+<<<<<<< HEAD
   publicId?: string | null;
+=======
+  publicId?: string;
+>>>>>>> basaar/parcial05
   memberId: string;
 }
 
@@ -24,3 +32,15 @@ export type EditableMember = {
   city: string;
   country: string;
 }
+<<<<<<< HEAD
+=======
+
+export class MemberParams {
+  gender?: string;
+  minAge = 18;
+  maxAge = 120;
+  pageNumber = 1;
+  pageSize = 10;
+  orderBy = 'age';
+}
+>>>>>>> basaar/parcial05

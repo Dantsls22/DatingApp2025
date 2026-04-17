@@ -76,6 +76,10 @@ public static class Program
             var logger = services.GetRequiredService<ILogger>();
             logger.LogError(ex, "Migration process failed!");
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
         // Configure the HTTP request pipeline.
         app.UseMiddleware<ExceptionMiddleware>();
         if (app.Environment.IsDevelopment())
@@ -132,8 +136,18 @@ public static class Program
     private static void AddScopedServices(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ITokenService, TokenService>();
+<<<<<<< HEAD
         builder.Services.AddScoped<IMembersRepository, MemberRepository>();
         builder.Services.AddScoped<IPhotoService, PhotoService>();
         builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
     }
 }
+=======
+        builder.Services.AddScoped<IMembersRepository, MembersRepository>();
+        builder.Services.AddScoped<IPhotoService, PhotoService>();
+        builder.Services.AddScoped<ILikesRepository, LikesRepository>();
+        builder.Services.AddScoped<UserActivityLogger>();
+        builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+    }
+}
+>>>>>>> basaar/parcial05

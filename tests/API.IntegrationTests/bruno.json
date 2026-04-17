@@ -5,6 +5,7 @@
   "ignore": [
     "node_modules",
     ".git"
+<<<<<<< HEAD
   ],
   "size": 0.031217575073242188,
   "filesCount": 106,
@@ -12,4 +13,7 @@
     "requestType": "http",
     "requestUrl": "https://localhost:5001"
   }
+=======
+  ]
+>>>>>>> basaar/parcial05
 }

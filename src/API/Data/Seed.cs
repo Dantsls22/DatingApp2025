@@ -4,7 +4,10 @@ using System.Text.Json;
 using API.DTOs;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore.Metadata;
+=======
+>>>>>>> basaar/parcial05
 
 namespace API.Data;
 
@@ -14,8 +17,13 @@ public class Seed
     {
         if (await context.Users.AnyAsync()) return;
 
+<<<<<<< HEAD
         var seedUserData = await File.ReadAllTextAsync("Data/UserSeedData.json");
         var seedUsers = JsonSerializer.Deserialize<List<SeedUserDto>>(seedUserData);
+=======
+        var seedUsersData = await File.ReadAllTextAsync("Data/UserSeedData.json");
+        var seedUsers = JsonSerializer.Deserialize<List<SeedUserDto>>(seedUsersData);
+>>>>>>> basaar/parcial05
 
         if (seedUsers == null)
         {
@@ -32,7 +40,11 @@ public class Seed
                 Email = seedUser.Email,
                 DisplayName = seedUser.DisplayName,
                 ImageUrl = seedUser.ImageUrl,
+<<<<<<< HEAD
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("password")),
+=======
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd")),
+>>>>>>> basaar/parcial05
                 PasswordSalt = hmac.Key,
                 Member = new Member
                 {
@@ -42,12 +54,20 @@ public class Seed
                     City = seedUser.City,
                     Country = seedUser.Country,
                     Description = seedUser.Description,
+<<<<<<< HEAD
                     BirthDate = seedUser.BirthDate,
+=======
+                    BirthDay = seedUser.BirthDay,
+>>>>>>> basaar/parcial05
                     ImageUrl = seedUser.ImageUrl,
                     LastActive = seedUser.LastActive,
                     Created = seedUser.Created
                 }
             };
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
             user.Member.Photos.Add(new Photo
             {
                 Url = seedUser.ImageUrl!,
@@ -56,6 +76,13 @@ public class Seed
 
             context.Users.Add(user);
         }
+<<<<<<< HEAD
         await context.SaveChangesAsync();
     }
 }
+=======
+
+        await context.SaveChangesAsync();
+    }
+}
+>>>>>>> basaar/parcial05

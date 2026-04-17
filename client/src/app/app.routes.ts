@@ -2,10 +2,16 @@ import { Routes } from '@angular/router';
 import { Home } from '../features/home/home';
 import { MemberList } from '../features/members/member-list/member-list';
 import { MemberDetail } from '../features/members/member-detail/member-detail';
+<<<<<<< HEAD
 import { Messages } from '../features/messages/messages';
 import { Lists } from '../features/lists/lists';
 import { authGuard } from '../core/guards/auth-guard';
 import { TestBed } from '@angular/core/testing';
+=======
+import { Lists } from '../features/lists/lists';
+import { Messages } from '../features/messages/messages';
+import { authGuard } from '../core/guards/auth-guard';
+>>>>>>> basaar/parcial05
 import { TestErrors } from '../features/test-errors/test-errors';
 import { NotFound } from '../shared/errors/not-found/not-found';
 import { ServerError } from '../shared/errors/server-error/server-error';
@@ -24,6 +30,7 @@ export const routes: Routes = [
     children: [
       { path: "members", component: MemberList },
       {
+<<<<<<< HEAD
          path: "members/:id",
          resolve:{ member: memberResolver } ,
          runGuardsAndResolvers:"always",
@@ -36,6 +43,20 @@ export const routes: Routes = [
             { path: "messages", component: MemberMessages, title: "Messages"  },
           ]
          },
+=======
+        path: "members/:id",
+        resolve: { member: memberResolver },
+        runGuardsAndResolvers: "always",
+        component: MemberDetail,
+        children: [
+          { path: "", redirectTo: "profile", pathMatch: "full" },
+          { path: "profile", component: MemberProfile, title: "Profile",
+              canDeactivate: [preventUnsavedChangesGuard] },
+          { path: "photos", component: MemberPhotos, title: "Photos" },
+          { path: "messages", component: MemberMessages, title: "Messages" },
+        ]
+      },
+>>>>>>> basaar/parcial05
       { path: "lists", component: Lists },
       { path: "messages", component: Messages }
     ]

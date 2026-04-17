@@ -1,4 +1,5 @@
 export const themes = [
+<<<<<<< HEAD
   "light",
   "dark",
   "cupcake",
@@ -9,4 +10,27 @@ export const themes = [
   "retro",
   "cyberpunk",
   "valentine",
+=======
+    "aqua",
+    "black",
+    "bumblebee",
+    "corporate",
+    "cupcake",
+    "cyberpunk",
+    "dark",
+    "dracula",
+    "emerald",
+    "fantasy",
+    "forest",
+    "garden",
+    "halloween",
+    "light",
+    "lofi",
+    "luxury",
+    "pastel",
+    "retro",
+    "synthwave",
+    "valentine",
+    "wireframe"
+>>>>>>> basaar/parcial05
 ];

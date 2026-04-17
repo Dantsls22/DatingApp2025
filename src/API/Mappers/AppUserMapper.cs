@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 using System;
+=======
+>>>>>>> basaar/parcial05
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -18,8 +21,11 @@ public static class AppUserMapper
             Token = tokenService.CreateToken(user)
         };
     }
+<<<<<<< HEAD
     //public static string ToMySpecialString(this DateTime dateTime)
     //{
       //  return dateTime.ToString("yyyy-MM-dd" + " Hola que tal");
     //}
+=======
+>>>>>>> basaar/parcial05
 }

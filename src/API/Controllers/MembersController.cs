@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 using System.Security.Claims;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+=======
+using API.DTOs;
+using API.Entities;
+using API.Extensions;
+using API.Helpers;
+>>>>>>> basaar/parcial05
 using API.Interfaces;
 using API.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +18,7 @@ namespace API.Controllers;
 
 [Authorize]
 public class MembersController(IMembersRepository membersRepository,
+<<<<<<< HEAD
 IPhotoService photoService) : BaseApiController
 {
     [HttpGet]
@@ -18,6 +26,16 @@ IPhotoService photoService) : BaseApiController
     {
         await Task.Delay(1000);
         return Ok(await membersRepository.GetMembersAsync());
+=======
+    IPhotoService photoService) : BaseApiController
+{
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers([FromQuery] MemberRequest request)
+    {
+        request.CurrentMemberId = User.GetMemberId();
+        
+        return Ok(await membersRepository.GetMembersAsync(request));
+>>>>>>> basaar/parcial05
     }
 
     [HttpGet("{id}")] // https://localhost:5001/api/members/bob-id
@@ -40,7 +58,10 @@ IPhotoService photoService) : BaseApiController
     public async Task<ActionResult> UpdateMember(MemberUpdateRequest request)
     {
         var memberId = User.GetMemberId();
+<<<<<<< HEAD
 
+=======
+>>>>>>> basaar/parcial05
         var member = await membersRepository.GetMemberForUpdateAsync(memberId);
 
         if (member == null)
@@ -55,7 +76,10 @@ IPhotoService photoService) : BaseApiController
 
         member.User.DisplayName = request.DisplayName ?? member.User.DisplayName;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> basaar/parcial05
         membersRepository.Update(member);
 
         if (await membersRepository.SaveAllAsync())
@@ -64,12 +88,21 @@ IPhotoService photoService) : BaseApiController
         }
 
         return BadRequest("Failed to update profile");
+<<<<<<< HEAD
 
     }
+=======
+    }
+
+>>>>>>> basaar/parcial05
     [HttpPost("photo")]
     public async Task<ActionResult<Photo>> AddPhoto([FromForm] IFormFile file)
     {
         var member = await membersRepository.GetMemberForUpdateAsync(User.GetMemberId());
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
         if (member == null)
         {
             return NotFound("Member not found");
@@ -102,23 +135,38 @@ IPhotoService photoService) : BaseApiController
             return photo;
         }
 
+<<<<<<< HEAD
         return BadRequest("Something went wrong!");
+=======
+        return BadRequest("Somehting went wrong!");
+>>>>>>> basaar/parcial05
     }
 
     [HttpPut("photo/{photoId}")]
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
         var member = await membersRepository.GetMemberForUpdateAsync(User.GetMemberId());
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
         if (member == null)
         {
             return BadRequest("Token not available in member");
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
         var photo = member.Photos.SingleOrDefault(p => p.Id == photoId);
 
         if (member.ImageUrl == photo?.Url || photo == null)
         {
             return BadRequest("Cannot set photo as main");
+<<<<<<< HEAD
 
+=======
+>>>>>>> basaar/parcial05
         }
 
         member.ImageUrl = photo.Url;
@@ -130,12 +178,21 @@ IPhotoService photoService) : BaseApiController
         }
 
         return BadRequest("Some error happened while setting main photo");
+<<<<<<< HEAD
 
     }
+=======
+    }
+
+>>>>>>> basaar/parcial05
     [HttpDelete("photo/{photoId}")]
     public async Task<ActionResult> DeletePhoto(int photoId)
     {
         var member = await membersRepository.GetMemberForUpdateAsync(User.GetMemberId());
+<<<<<<< HEAD
+=======
+
+>>>>>>> basaar/parcial05
         if (member == null)
         {
             return BadRequest("Token not available in member");
@@ -156,13 +213,24 @@ IPhotoService photoService) : BaseApiController
                 return BadRequest(result.Error.Message);
             }
         }
+<<<<<<< HEAD
         member.Photos.Remove(photo);
 
         if( await membersRepository.SaveAllAsync())
+=======
+
+        member.Photos.Remove(photo);
+
+        if (await membersRepository.SaveAllAsync())
+>>>>>>> basaar/parcial05
         {
             return Ok();
         }
 
         return BadRequest("There was a problem while deleting your photo");
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> basaar/parcial05

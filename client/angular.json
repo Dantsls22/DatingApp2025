@@ -26,7 +26,11 @@
           "skipTests": false,
           "path": "src"
         },
+<<<<<<< HEAD
          "@schematics/angular:pipe": {
+=======
+        "@schematics/angular:pipe": {
+>>>>>>> basaar/parcial05
           "skipTests": false,
           "path": "src/core/pipes"
         }

@@ -5,29 +5,48 @@ meta {
 }
 
 post {
+<<<<<<< HEAD
   url: https://localhost:5001/api/account/login
+=======
+  url: {{baseUrl}}/api/account/login
+>>>>>>> basaar/parcial05
   body: json
   auth: inherit
 }
 
 body:json {
   {
+<<<<<<< HEAD
       "email" : "arenita@test.com",
       "password" : "password"
+=======
+    "email": "arenita@test.com",
+    "password": "Pa$$w0rd"
+>>>>>>> basaar/parcial05
   }
 }
 
 tests {
   test("Should be able to login", function() {
     expect(res.getStatus()).to.equal(200);
+<<<<<<< HEAD
   })
   
   const data = res.body;
   
   bru.setEnvVar('authToken', data.token);
+=======
+  });
+  
+  const data = res.body;
+  bru.setVar('authToken', data.token);
+>>>>>>> basaar/parcial05
 }
 
 settings {
   encodeUrl: true
+<<<<<<< HEAD
   timeout: 0
+=======
+>>>>>>> basaar/parcial05
 }

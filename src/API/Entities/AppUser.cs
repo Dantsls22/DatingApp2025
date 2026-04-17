@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 using System; // directivas using se puede borrar
 
 namespace API.Entities; // nombre del espacio
+=======
+namespace API.Entities;
+>>>>>>> basaar/parcial05
 
 public class AppUser
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string DisplayName { get; set; }
     public required string Email { get; set; }
+<<<<<<< HEAD
 
      public string? ImageUrl { get; set; }
 
@@ -27,3 +32,12 @@ public class AppUser
 //inmutable es decir que no se puede cambiar despues de la inicializacion
 //evitar el cuello de botella es importante porque si no se inicializa dara error
 //el entero es mutable y puede cambiar
+=======
+    public string? ImageUrl { get; set; }
+    public required byte[] PasswordHash { get; set; }
+    public required byte[] PasswordSalt { get; set; }
+
+    // Navigation properties
+    public Member Member { get; set; } = null!;
+}
+>>>>>>> basaar/parcial05

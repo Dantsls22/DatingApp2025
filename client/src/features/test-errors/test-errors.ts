@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+<<<<<<< HEAD
 import { Component, inject, signal, Signal } from '@angular/core';
+=======
+import { Component, inject, signal } from '@angular/core';
+>>>>>>> basaar/parcial05
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -27,28 +31,45 @@ export class TestErrors {
     this.http.get(this.baseUrl + "error/bad-request").subscribe({
       next: response => console.log(response),
       error: error => console.log(error)
+<<<<<<< HEAD
     });
+=======
+    })
+>>>>>>> basaar/parcial05
   }
 
   get401Error(): void {
     this.http.get(this.baseUrl + "error/auth").subscribe({
       next: response => console.log(response),
       error: error => console.log(error)
+<<<<<<< HEAD
     });
+=======
+    })
+>>>>>>> basaar/parcial05
   }
 
   get404Error(): void {
     this.http.get(this.baseUrl + "error/not-found").subscribe({
       next: response => console.log(response),
       error: error => console.log(error)
+<<<<<<< HEAD
     });
+=======
+    })
+>>>>>>> basaar/parcial05
   }
 
   get500Error(): void {
     this.http.get(this.baseUrl + "error/server-error").subscribe({
       next: response => console.log(response),
       error: error => console.log(error)
+<<<<<<< HEAD
     });
   }
 
+=======
+    })
+  }
+>>>>>>> basaar/parcial05
 }

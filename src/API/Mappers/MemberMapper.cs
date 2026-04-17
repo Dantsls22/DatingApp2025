@@ -17,4 +17,8 @@ public static class MemberMapper
 
         return member;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> basaar/parcial05

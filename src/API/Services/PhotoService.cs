@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 using API.Entities;
+=======
+>>>>>>> basaar/parcial05
 using API.Helpers;
 using API.Interfaces;
 using CloudinaryDotNet;
@@ -13,6 +16,7 @@ public class PhotoService : IPhotoService
 
     public PhotoService(IOptions<CloudinarySettings> config)
     {
+<<<<<<< HEAD
         var account = new Account(
             config.Value.CloudName,
             config.Value.ApiKey,
@@ -23,13 +27,28 @@ public class PhotoService : IPhotoService
     public async Task<DeletionResult> DeletePhotoAsync(string publicId)
     {
         var deleteParams = new DeletionParams(publicId);
+=======
+        var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+        _cloudinary = new Cloudinary(account);
+    }
+
+    public async Task<DeletionResult> DeletePhotoAsync(string publicId)
+    {
+        var deleteParams = new DeletionParams(publicId);
+        
+>>>>>>> basaar/parcial05
         return await _cloudinary.DestroyAsync(deleteParams);
     }
 
     public async Task<ImageUploadResult> UploadPhotoAsync(IFormFile file)
     {
         var uploadResult = new ImageUploadResult();
+<<<<<<< HEAD
         if(file.Length > 0)
+=======
+
+        if (file.Length > 0)
+>>>>>>> basaar/parcial05
         {
             await using var stream = file.OpenReadStream();
             var uploadParams = new ImageUploadParams

@@ -13,6 +13,7 @@ post {
 body:json {
   {
     "email": "arenita@test.com",
+<<<<<<< HEAD
     "password": "password"
   }
 }
@@ -31,6 +32,9 @@ script:post-response {
   
   if (test("Has properties")) {
       bru.setGlobalEnvVar('token', user.token);
+=======
+    "password": "Pa$$w0rd"
+>>>>>>> basaar/parcial05
   }
 }
 
@@ -40,10 +44,17 @@ tests {
   });
   
   const data = res.body;
+<<<<<<< HEAD
   bru.setEnvVar('arenitaToken', data.token);
+=======
+  bru.setVar('token', data.token);
+>>>>>>> basaar/parcial05
 }
 
 settings {
   encodeUrl: true
+<<<<<<< HEAD
   timeout: 0
+=======
+>>>>>>> basaar/parcial05
 }

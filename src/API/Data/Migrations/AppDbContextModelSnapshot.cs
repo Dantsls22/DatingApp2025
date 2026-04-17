@@ -43,7 +43,11 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<< HEAD
                     b.ToTable("Users", (string)null);
+=======
+                    b.ToTable("Users");
+>>>>>>> basaar/parcial05
                 });
 
             modelBuilder.Entity("API.Entities.Member", b =>
@@ -51,7 +55,11 @@ namespace API.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
+<<<<<<< HEAD
                     b.Property<DateOnly>("BirthDate")
+=======
+                    b.Property<DateOnly>("BirthDay")
+>>>>>>> basaar/parcial05
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -84,7 +92,26 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<< HEAD
                     b.ToTable("Members", (string)null);
+=======
+                    b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("API.Entities.MemberLike", b =>
+                {
+                    b.Property<string>("SourceMemberId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TargetMemberId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SourceMemberId", "TargetMemberId");
+
+                    b.HasIndex("TargetMemberId");
+
+                    b.ToTable("Likes");
+>>>>>>> basaar/parcial05
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
@@ -108,7 +135,11 @@ namespace API.Data.Migrations
 
                     b.HasIndex("MemberId");
 
+<<<<<<< HEAD
                     b.ToTable("Photos", (string)null);
+=======
+                    b.ToTable("Photos");
+>>>>>>> basaar/parcial05
                 });
 
             modelBuilder.Entity("API.Entities.Member", b =>
@@ -122,10 +153,36 @@ namespace API.Data.Migrations
                     b.Navigation("User");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.Member", "Member")
                         .WithMany()
+=======
+            modelBuilder.Entity("API.Entities.MemberLike", b =>
+                {
+                    b.HasOne("API.Entities.Member", "SourceMember")
+                        .WithMany("LikedMembers")
+                        .HasForeignKey("SourceMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Member", "TargetMember")
+                        .WithMany("LikedByMembers")
+                        .HasForeignKey("TargetMemberId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("SourceMember");
+
+                    b.Navigation("TargetMember");
+                });
+
+            modelBuilder.Entity("API.Entities.Photo", b =>
+                {
+                    b.HasOne("API.Entities.Member", "Member")
+                        .WithMany("Photos")
+>>>>>>> basaar/parcial05
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -138,6 +195,18 @@ namespace API.Data.Migrations
                     b.Navigation("Member")
                         .IsRequired();
                 });
+<<<<<<< HEAD
+=======
+
+            modelBuilder.Entity("API.Entities.Member", b =>
+                {
+                    b.Navigation("LikedByMembers");
+
+                    b.Navigation("LikedMembers");
+
+                    b.Navigation("Photos");
+                });
+>>>>>>> basaar/parcial05
 #pragma warning restore 612, 618
         }
     }

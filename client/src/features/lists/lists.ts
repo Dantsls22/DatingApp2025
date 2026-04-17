@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,6 +11,8 @@ import { Component } from '@angular/core';
 export class Lists {
 
 =======
+=======
+>>>>>>> basaar/parcial05
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { LikesService } from '../../core/services/likes-service';
 import { Member } from '../../types/member';
@@ -59,5 +62,8 @@ export class Lists implements OnInit {
     this.pageSize = event.pageSize;
     this.loadLikes();
   }
+<<<<<<< HEAD
 >>>>>>> b005e48 (Parcial05 - Add likes pagination to SPA)
+=======
+>>>>>>> basaar/parcial05
 }

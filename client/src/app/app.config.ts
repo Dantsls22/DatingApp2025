@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -5,6 +6,14 @@ import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/
 import { routes } from './app.routes'; //esto depende de si el archivo existe
 import { InitService } from '../core/services/init-service';
 import { last, lastValueFrom } from 'rxjs';
+=======
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { provideRouter, withViewTransitions } from '@angular/router';
+import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { InitService } from '../core/services/init-service';
+import { lastValueFrom } from 'rxjs';
+>>>>>>> basaar/parcial05
 import { errorInterceptor } from '../core/interceptors/error-interceptor';
 import { jwtInterceptor } from '../core/interceptors/jwt-interceptor';
 import { loadingInterceptor } from '../core/interceptors/loading-interceptor';
@@ -15,10 +24,14 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes, withViewTransitions()),
     provideHttpClient(withInterceptors([errorInterceptor, jwtInterceptor, loadingInterceptor])),
+<<<<<<< HEAD
     importProvidersFrom(HttpClientModule), //  agregado
     provideAppInitializer(async () => {
       // Aquí puedes agregar lógica de inicialización si es necesario
 
+=======
+    provideAppInitializer(async () => {
+>>>>>>> basaar/parcial05
       const initService = inject(InitService);
 
       return new Promise<void>((resolve) => {
@@ -27,12 +40,23 @@ export const appConfig: ApplicationConfig = {
             return lastValueFrom(initService.init())
           } finally {
             const splash = document.getElementById("initial-splash");
+<<<<<<< HEAD
             if (splash) {
               splash.remove();
             }
             resolve();
           }
         }, 500); // Simula un retardo de 500 ms
+=======
+
+            if (splash) {
+              splash.remove();
+            }
+
+            resolve();
+          }
+        }, 500);
+>>>>>>> basaar/parcial05
       });
     })
   ]

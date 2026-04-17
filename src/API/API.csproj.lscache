@@ -62,17 +62,28 @@ Controllers/
  AccountController.cs
  BaseApiController.cs
  ErrorController.cs
+ LikesController.cs
  MembersController.cs
 Data/
  AppDbContext.cs
+ LikesRepository.cs
  MemberRepository.cs
+ MembersRepository.cs
  Migrations/
+  20250828134221_InitialCreate.cs
+  20250828134221_InitialCreate.Designer.cs
   20250907204625_InitialCreate.cs
   20250907204625_InitialCreate.Designer.cs
+  20250910131055_UserPasswordAdded.cs
+  20250910131055_UserPasswordAdded.Designer.cs
   20250927014525_UserPasswordAdded.cs
   20250927014525_UserPasswordAdded.Designer.cs
+  20251013133143_MemberEntityAdd.cs
+  20251013133143_MemberEntityAdd.Designer.cs
   20251026062012_MemberEntityAdd.cs
   20251026062012_MemberEntityAdd.Designer.cs
+  20260330134200_LikeEntityAdded.cs
+  20260330134200_LikeEntityAdded.Designer.cs
   AppDbContextModelSnapshot.cs
  Seed.cs
 DTOs/
@@ -85,11 +96,20 @@ DTOs/
 Entities/
  AppUser.cs
  Member.cs
+ MemberLike.cs
  Photo.cs
-Exceptions/APIException.cs
+Exceptions/ApiException.cs
 Extensions/ClaimsPrincipalExtensions.cs
-Helpers/CloudinarySettings.cs
+Helpers/
+ CloudinarySettings.cs
+ LikesRequest.cs
+ MemberRequest.cs
+ Pagination.cs
+ PaginationRequest.cs
+ PaginationResult.cs
+ UserActivityLogger.cs
 Interfaces/
+ ILikesRepository.cs
  IMembersRepository.cs
  IPhotoService.cs
  ITokenService.cs

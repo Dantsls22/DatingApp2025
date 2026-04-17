@@ -2,7 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiError } from '../../../types/error';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> basaar/parcial05
 @Component({
   selector: 'app-server-error',
   imports: [],
@@ -19,7 +22,14 @@ export class ServerError {
     this.error.set(navigation?.extras?.state?.["error"]);
   }
 
+<<<<<<< HEAD
   detailsToggle(){
     this.showDetails = !this.showDetails;
   }
+=======
+  detailsToggle() {
+    this.showDetails = !this.showDetails;
+  }
+
+>>>>>>> basaar/parcial05
 }

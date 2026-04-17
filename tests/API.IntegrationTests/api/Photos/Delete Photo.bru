@@ -5,15 +5,22 @@ meta {
 }
 
 delete {
+<<<<<<< HEAD
   url: {{baseUrl}}/api/members/photo/13
   body: none
   auth: bearer
+=======
+  url: {{baseUrl}}/api/members/photo/1
+  body: none
+  auth: inherit
+>>>>>>> basaar/parcial05
 }
 
 headers {
   Authorization: Bearer {{token}}
 }
 
+<<<<<<< HEAD
 auth:bearer {
   token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyZW5pdGFAdGVzdC5jb20iLCJuYW1laWQiOiJhcmVuaXRhLWlkIiwibmJmIjoxNzcyNDA2NDA5LCJleHAiOjE3NzMwMTEyMDksImlhdCI6MTc3MjQwNjQwOX0.HeSr3VnqrD_YEcZKz4O-_LkZNl6DTvY9GfRSo9WIxXHVq7bEJwxx65GLHHCVWr2rBO_ecSiDgnjeQIdBy1eX0A
 }
@@ -26,4 +33,8 @@ vars:pre-request {
 settings {
   encodeUrl: true
   timeout: 0
+=======
+settings {
+  encodeUrl: true
+>>>>>>> basaar/parcial05
 }

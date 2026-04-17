@@ -21,6 +21,11 @@
         "tags": [
           "Account"
         ],
+<<<<<<< HEAD
+=======
+        "summary": "Creates an User.",
+        "description": "Sample request:\n            \n    POST api/account/register\n    {\n       \"displayName\": \"displayName\",\n       \"email\": \"test@test.com\",\n       \"password\": \"password\"\n    }",
+>>>>>>> basaar/parcial05
         "operationId": "Account_Register",
         "requestBody": {
           "x-name": "request",
@@ -36,7 +41,11 @@
         },
         "responses": {
           "200": {
+<<<<<<< HEAD
             "description": "",
+=======
+            "description": "Returns the newly created item",
+>>>>>>> basaar/parcial05
             "content": {
               "application/json": {
                 "schema": {
@@ -44,6 +53,19 @@
                 }
               }
             }
+<<<<<<< HEAD
+=======
+          },
+          "400": {
+            "description": "If the item is null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+>>>>>>> basaar/parcial05
           }
         }
       }
@@ -53,6 +75,10 @@
         "tags": [
           "Account"
         ],
+<<<<<<< HEAD
+=======
+        "summary": "Login as an User.",
+>>>>>>> basaar/parcial05
         "operationId": "Account_Login",
         "requestBody": {
           "x-name": "request",
@@ -68,7 +94,11 @@
         },
         "responses": {
           "200": {
+<<<<<<< HEAD
             "description": "",
+=======
+            "description": "Returns the valid user token",
+>>>>>>> basaar/parcial05
             "content": {
               "application/json": {
                 "schema": {
@@ -76,6 +106,19 @@
                 }
               }
             }
+<<<<<<< HEAD
+=======
+          },
+          "401": {
+            "description": "If the username or password are incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+>>>>>>> basaar/parcial05
           }
         }
       }
@@ -101,6 +144,30 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "/api/Error/auth": {
+      "get": {
+        "tags": [
+          "Error"
+        ],
+        "operationId": "Error_GetAuth",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+>>>>>>> basaar/parcial05
     "/api/Error/not-found": {
       "get": {
         "tags": [
@@ -143,12 +210,32 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/Error/auth": {
       "get": {
         "tags": [
           "Error"
         ],
         "operationId": "Error_GetAuth",
+=======
+    "/api/Likes/{targetMemberId}": {
+      "post": {
+        "tags": [
+          "Likes"
+        ],
+        "operationId": "Likes_ToggleLike",
+        "parameters": [
+          {
+            "name": "targetMemberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+>>>>>>> basaar/parcial05
         "responses": {
           "200": {
             "description": "",
@@ -164,12 +251,161 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "/api/Likes/list": {
+      "get": {
+        "tags": [
+          "Likes"
+        ],
+        "operationId": "Likes_GetCurrentMemberLikes",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Likes": {
+      "get": {
+        "tags": [
+          "Likes"
+        ],
+        "operationId": "Likes_GetMemberLikes",
+        "parameters": [
+          {
+            "name": "MemberId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "Predicate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 3
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginationResultOfMember"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+>>>>>>> basaar/parcial05
     "/api/Members": {
       "get": {
         "tags": [
           "Members"
         ],
         "operationId": "Members_GetMembers",
+<<<<<<< HEAD
+=======
+        "parameters": [
+          {
+            "name": "Gender",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "CurrentMemberId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "MinAge",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 3
+          },
+          {
+            "name": "MaxAge",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 4
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 5
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 6
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 7
+          }
+        ],
+>>>>>>> basaar/parcial05
         "responses": {
           "200": {
             "description": "",
@@ -427,13 +663,53 @@
           }
         }
       },
+<<<<<<< HEAD
+=======
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+>>>>>>> basaar/parcial05
       "RegisterRequest": {
         "type": "object",
         "additionalProperties": false,
         "required": [
           "displayName",
           "email",
+<<<<<<< HEAD
           "password"
+=======
+          "password",
+          "gender",
+          "city",
+          "country",
+          "birthDay"
+>>>>>>> basaar/parcial05
         ],
         "properties": {
           "displayName": {
@@ -448,6 +724,26 @@
           "password": {
             "type": "string",
             "minLength": 6
+<<<<<<< HEAD
+=======
+          },
+          "gender": {
+            "type": "string",
+            "minLength": 1
+          },
+          "city": {
+            "type": "string",
+            "minLength": 1
+          },
+          "country": {
+            "type": "string",
+            "minLength": 1
+          },
+          "birthDay": {
+            "type": "string",
+            "format": "date",
+            "minLength": 1
+>>>>>>> basaar/parcial05
           }
         }
       },
@@ -463,6 +759,46 @@
           }
         }
       },
+<<<<<<< HEAD
+=======
+      "PaginationResultOfMember": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Member"
+            }
+          }
+        }
+      },
+      "PaginationMetadata": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+>>>>>>> basaar/parcial05
       "Member": {
         "type": "object",
         "additionalProperties": false,
@@ -470,7 +806,11 @@
           "id": {
             "type": "string"
           },
+<<<<<<< HEAD
           "birthDate": {
+=======
+          "birthDay": {
+>>>>>>> basaar/parcial05
             "type": "string",
             "format": "date"
           },

@@ -5,26 +5,44 @@ meta {
 }
 
 post {
+<<<<<<< HEAD
   url: https://localhost:5001/api/account/login
+=======
+  url: {{baseUrl}}/api/account/login
+>>>>>>> basaar/parcial05
   body: json
   auth: inherit
 }
 
 body:json {
   {
+<<<<<<< HEAD
       "email" : "testa@test.com",
       "password" : ""
+=======
+    "email": "test@test.com",
+    "password": ""
+>>>>>>> basaar/parcial05
   }
 }
 
 tests {
+<<<<<<< HEAD
   test("Should return unathorized", function() {
     expect(res.getStatus()).to.equal(401);
   });
   
+=======
+  test("Should return unauthorized", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+>>>>>>> basaar/parcial05
 }
 
 settings {
   encodeUrl: true
+<<<<<<< HEAD
   timeout: 0
+=======
+>>>>>>> basaar/parcial05
 }

@@ -1,15 +1,24 @@
 meta {
   name: Members - Unauthorized
   type: http
+<<<<<<< HEAD
   seq: 2
 }
 
 get {
   url: https:localhost:5001/api/members/
+=======
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/members
+>>>>>>> basaar/parcial05
   body: none
   auth: none
 }
 
+<<<<<<< HEAD
 headers {
   Authorization: {{authToken}}
 }
@@ -23,9 +32,18 @@ tests {
     expect(res.getStatus()).to.equal(401);
   });
   
+=======
+tests {
+  test("Should return unauthorized", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+>>>>>>> basaar/parcial05
 }
 
 settings {
   encodeUrl: true
+<<<<<<< HEAD
   timeout: 0
+=======
+>>>>>>> basaar/parcial05
 }
